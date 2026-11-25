@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calixta · Tienda online</title>
+<meta name="description" content="Calixta — cosmética natural vegana hecha en Córdoba. Elegí tus productos y enviá tu pedido por WhatsApp.">
+<!-- Vista previa al compartir el link por WhatsApp: reemplazá TU-USUARIO por tu usuario de GitHub -->
+<meta property="og:title" content="Calixta · Cosmética natural vegana">
+<meta property="og:description" content="Elegí tus productos y mandanos el pedido por WhatsApp en un toque.">
+<meta property="og:image" content="https://TU-USUARIO.github.io/calixta/img/hero.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/mandala.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: sereno, cálido, confiable — una boutique natural, no un marketplace
+   IDEA: el catálogo impreso de Calixta convertido en mostrador: tarjetas de papel crema, sellos verdes
+   PICTURE: la foto de portada del catálogo, grande, con los frascos ámbar como protagonistas
+   COLOUR and TYPE: crema #f7f1e9, verde bosque #3e5a3a, lavanda #8a78b0 de acento; Cormorant Garamond + Jost
+   LAYOUT: hero a sangre, rutina en 3 pasos, mostrador filtrable, carrito lateral que arma el WhatsApp */
+:root{color-scheme:light dark;
+--bg:light-dark(#f7f1e9,#171d16);--card:light-dark(#fffaf3,#212a1f);--ink:light-dark(#22301f,#efe8dc);
+--soft:light-dark(#5f6b58,#b8c0ad);--green:light-dark(#3e5a3a,#9fbf8f);--onGreen:light-dark(#fff,#132012);
+--sage:light-dark(#e6e4d3,#2b3528);--line:light-dark(#e2d9cb,#334030);--lav:light-dark(#8a78b0,#b9a8dd);--lavbg:light-dark(#ece6f4,#2c2838)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Jost,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.05;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px)}h2{font-size:clamp(32px,4vw,44px)}h3{font-size:24px}
+a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
+.band{padding:clamp(32px,5vw,72px) max(5vw,16px)}.wrap{max-width:1240px;margin:0 auto}
+.mark{width:34px;height:34px;background:var(--green);-webkit-mask:url(img/mandala.png) center/contain no-repeat;mask:url(img/mandala.png) center/contain no-repeat;flex:none}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;gap:14px;padding:10px max(5vw,16px);max-width:1340px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}.brand b{font:600 28px/1 "Cormorant Garamond",serif;color:var(--green)}
+.brand small{display:block;font-size:11px;color:var(--soft);letter-spacing:.04em}
+nav{margin-left:auto;display:flex;gap:20px}nav a{text-decoration:none;color:var(--soft)}nav a:hover{color:var(--green)}
+.cartbtn{display:flex;align-items:center;gap:8px;background:var(--green);color:var(--onGreen);border:0;border-radius:99px;padding:0 18px;height:44px;font-weight:500}
+.cartbtn i{font-style:normal;background:var(--onGreen);color:var(--green);border-radius:99px;min-width:22px;height:22px;display:grid;place-items:center;font-size:13px}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,56px);align-items:center;max-width:1240px;margin:0 auto}
+.hero p{font-size:18px;color:var(--soft);max-width:34em}
+.heroimg{border-radius:28px;overflow:hidden;aspect-ratio:5/4;box-shadow:0 30px 60px -30px rgb(40 50 30/.45)}
+.heroimg img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:99px;border:1.5px solid var(--green);background:var(--green);color:var(--onGreen);text-decoration:none;font-weight:500}
+.btn.ghost{background:transparent;color:var(--green)}.btn:focus-visible,.chip:focus-visible,.cartbtn:focus-visible,.add:focus-visible{outline:3px solid var(--lav);outline-offset:2px}
+.badges{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--soft);font-size:14px;padding:0;margin:0;list-style:none}
+.badges li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--lav);margin-right:8px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;text-align:left;display:grid;gap:6px}
+.step:hover{border-color:var(--green)}.step span{font-size:13px;color:var(--lav);font-weight:600}.step small{color:var(--soft)}
+.tools{position:sticky;top:65px;z-index:10;background:var(--bg);padding:14px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1 1 420px}
+.chip{flex:none;height:44px;padding:0 18px;border-radius:99px;border:1px solid var(--line);background:var(--card)}
+.chip[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--onGreen)}
+.search{flex:1 1 220px;height:44px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 18px;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.card .ph{aspect-ratio:4/5;background:var(--sage);border:0;padding:0;display:block;width:100%;position:relative;overflow:hidden}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 65%}.ph img.tall,.det img.tall{object-fit:contain;background:var(--sage)}.tag{z-index:1}
+.card .bd{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{font-size:23px}.card p{margin:0;color:var(--soft);font-size:14.5px;line-height:1.45}
+.meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto;padding-top:10px}
+.price{font-weight:600;font-size:19px;white-space:nowrap}.size{color:var(--soft);font-size:14px;white-space:nowrap}
+.save{display:inline-block;background:var(--lavbg);color:var(--lav);border-radius:99px;padding:2px 10px;font-size:13px;font-weight:600;width:fit-content}
+.tag{position:absolute;top:12px;left:12px;background:var(--card);color:var(--green);border-radius:99px;padding:3px 12px;font-size:13px;font-weight:500}
+.add{height:44px;border-radius:99px;border:1.5px solid var(--green);background:transparent;color:var(--green);font-weight:500;margin-top:8px}
+.add:hover{background:var(--green);color:var(--onGreen)}
+.qty{display:flex;align-items:center;justify-content:space-between;height:44px;border-radius:99px;background:var(--green);color:var(--onGreen);margin-top:8px}
+.qty button{width:48px;height:44px;border:0;background:none;color:inherit;font-size:22px}
+.empty{padding:40px;text-align:center;color:var(--soft)}
+.how{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+.how div{border-top:2px solid var(--green);padding-top:14px}.how b{display:block;font-size:17px}.how p{margin:4px 0 0;color:var(--soft);font-size:15px}
+.free{background:var(--green);color:var(--onGreen)}.free h2{color:inherit}
+.free ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;padding:0;margin:24px 0 0}
+.free li b{display:block;font:600 24px "Cormorant Garamond",serif}.free li{opacity:.92}
+footer{padding:40px max(5vw,16px);border-top:1px solid var(--line);color:var(--soft);font-size:15px}
+.foot{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(440px,100%);background:var(--bg);z-index:40;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;border-left:1px solid var(--line)}
+.drawer.open{transform:none}.veil{position:fixed;inset:0;background:rgb(20 25 18/.45);z-index:30;opacity:0;pointer-events:none;transition:opacity .3s}.veil.on{opacity:1;pointer-events:auto}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.x{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:20px}
+.db{overflow-y:auto;padding:16px 20px;flex:1}
+.line{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.line img{width:64px;height:64px;border-radius:12px;object-fit:cover}.line b{display:block;font-weight:500;line-height:1.25}.line small{color:var(--soft)}
+.mini{display:flex;align-items:center;border:1px solid var(--line);border-radius:99px}.mini button{width:36px;height:36px;border:0;background:none;font-size:18px}
+.tip{background:var(--lavbg);border-radius:16px;padding:12px 14px;margin:12px 0;font-size:14.5px;display:grid;gap:8px}
+.tip button{justify-self:start;border:0;background:var(--lav);color:#fff;border-radius:99px;padding:8px 14px}
+.form{display:grid;gap:12px;margin-top:16px}.form label{display:grid;gap:4px;font-size:14px;color:var(--soft)}
+.form input,.form select,.form textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 12px;min-height:44px}
+.err{color:#b4413c;font-size:14px;min-height:1em}
+.df{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:10px}
+.tot{display:flex;justify-content:space-between;font-size:20px;font-weight:600}
+.wa{background:#1f8f4e;border-color:#1f8f4e;color:#fff;width:100%}
+dialog{border:0;border-radius:26px;padding:0;max-width:760px;width:calc(100% - 24px);background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgb(20 25 18/.5)}
+.det{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}.det img{width:100%;height:100%;object-fit:cover;min-height:280px}
+.det .in{padding:26px;display:grid;gap:10px;align-content:start}.det p{margin:0;color:var(--soft)}
+.det h4{margin:6px 0 0;font-size:14px;color:var(--green)}
+.pairs{display:flex;flex-wrap:wrap;gap:6px}.pairs button{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:6px 12px;font-size:14px}
+.float{position:fixed;right:18px;bottom:18px;z-index:25;width:58px;height:58px;border-radius:50%;background:#1f8f4e;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgb(0 0 0/.4)}
+.toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,200px);opacity:0;background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:99px;z-index:50;transition:transform .3s;font-size:15px}
+.toast.on{transform:translate(-50%,0);opacity:1}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:900px){nav{display:none}.cartbtn{margin-left:auto}.how{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.hero{grid-template-columns:1fr}.heroimg{order:-1;aspect-ratio:4/3;border-radius:20px}.steps,.free ul{grid-template-columns:1fr}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card h3{font-size:19px}.card p{display:none}.card .bd{padding:12px}.price{font-size:16px}
+.det{grid-template-columns:1fr}.det img{max-height:300px;min-height:0}.tools{top:61px}.brand small{display:none}.save{font-size:12px}}
+</style>
+</head>
+<body>
+<header><div class="top">
+  <a class="brand" href="#inicio"><span class="mark"></span><span><b>Calixta</b><small>Cosmética natural vegana</small></span></a>
+  <nav><a href="#rutina">Rutina facial</a><a href="#tienda">Productos</a><a href="#comprar">Cómo comprar</a></nav>
+  <button class="cartbtn" id="openCart" aria-label="Ver carrito">Mi pedido <i id="count">0</i></button>
+</div></header>
+
+<main id="inicio">
+<section class="band"><div class="hero">
+  <div>
+    <h1>Cuidado natural que se nota en tu piel</h1>
+    <p>Cremas, sérums, cuidado corporal y aromaterapia, veganos y hechos a mano en Córdoba. Elegí tus productos y mandanos el pedido por WhatsApp en un toque.</p>
+    <div class="ctas"><a class="btn" href="#tienda">Ver productos</a><a class="btn ghost" href="#rutina">Armá tu rutina</a></div>
+    <ul class="badges"><li>Vegano</li><li>Cruelty free</li><li>Fórmulas naturales</li><li>Para toda la familia</li></ul>
+  </div>
+  <div class="heroimg"><img src="img/hero.jpg" alt="Productos Calixta: crema corporal, óleo de argán, desodorante, crema facial y jabones sólidos"></div>
+</div></section>
+
+<section class="band" id="rutina" style="background:var(--sage)"><div class="wrap">
+  <h2>¿Por dónde empiezo? Tu rutina en 3 pasos</h2>
+  <p style="color:var(--soft);margin:10px 0 0">Tocá un paso y te mostramos los productos que van ahí.</p>
+  <div class="steps">
+    <button class="step" data-go="paso1"><span>Primer paso</span><h3>Limpieza</h3><small>Bálsamo limpiador o agua micelar</small></button>
+    <button class="step" data-go="paso2"><span>Segundo paso</span><h3>Tonificación</h3><small>Equilibra el pH y prepara la piel</small></button>
+    <button class="step" data-go="paso3"><span>Tercer paso</span><h3>Nutrición e hidratación</h3><small>Cremas de día con FPS 30 y de noche</small></button>
+  </div>
+</div></section>
+
+<section class="band" id="tienda"><div class="wrap">
+  <h2>Nuestros productos</h2>
+  <div class="tools">
+    <div class="chips" id="chips" role="toolbar" aria-label="Categorías"></div>
+    <input class="search" id="q" type="search" placeholder="Buscar: rosa mosqueta, FPS, champú…" aria-label="Buscar productos">
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="band" id="comprar" style="background:var(--sage)"><div class="wrap">
+  <h2>Cómo comprar</h2>
+  <div class="how">
+    <div><b>1. Elegí tus productos</b><p>Sumalos al pedido desde esta página.</p></div>
+    <div><b>2. Envialo por WhatsApp</b><p>El pedido llega armado, con total y datos de entrega. Te respondemos para confirmar.</p></div>
+    <div><b>3. Entregas en Córdoba</b><p>Córdoba Capital y Sierras Chicas. Coordinamos zonas y puntos de retiro.</p></div>
+    <div><b>4. Envíos a todo el país</b><p>Te pasamos el costo del envío al confirmar.</p></div>
+  </div>
+</div></section>
+
+<section class="band free"><div class="wrap">
+  <h2>Lo natural es que puedas cuidarte</h2>
+  <ul>
+    <li><b>Sin parabenos</b>Ni conservantes sintéticos que alteren el equilibrio natural.</li>
+    <li><b>Sin sulfatos</b>Ni detergentes agresivos que resequen la piel o el cabello.</li>
+    <li><b>Sin siliconas</b>Que tapan y opacan con el tiempo. Solo fórmulas simples y nobles.</li>
+  </ul>
+</div></section>
+</main>
+
+<footer><div class="foot">
+  <div class="brand"><span class="mark"></span><span><b>Calixta</b><small>Cosmética consciente hecha en Córdoba</small></span></div>
+  <div>WhatsApp: <a id="waText" href="#">3533 45-9858</a><br>Instagram: <a href="https://www.instagram.com/calixta.cuidadonatural/">@calixta.cuidadonatural</a></div>
+  <button class="btn ghost" id="share">Compartir la tienda</button>
+</div></footer>
+
+<a class="float" id="waFloat" href="#" aria-label="Escribinos por WhatsApp"><svg width="30" height="30" viewBox="0 0 32 32" fill="#fff"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3c.2.2 2.2 3.4 5.4 4.7 2 .9 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5s.3-1.3.2-1.5-.3-.2-.6-.4z"/></svg></a>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Tu pedido">
+  <div class="dh"><h3>Tu pedido</h3><button class="x" id="closeCart" aria-label="Cerrar">×</button></div>
+  <div class="db" id="cartBody"></div>
+  <div class="df" id="cartFoot"></div>
+</aside>
+
+<dialog id="dlg"></dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+{
+const WA = "5493533459858"; // número de WhatsApp de Calixta con 549 adelante, sin espacios
+// ====== CONFIGURACIÓN ======
+// Planilla de Google con los productos (pestaña "Productos"). Tiene que estar compartida como "Cualquier persona con el enlace: Lector".
+const SHEET_ID = "1v2pBowNCilBMk3NbM_L2YhfdA9KFOXToX01xK0YKI7Y";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/"+SHEET_ID+"/gviz/tq?tqx=out:csv&headers=1&sheet=Productos";
+// Copia de respaldo: se muestra si la planilla no responde.
+const FALLBACK_CSV = `id,activo,categoria,nombre,tamaño,precio,descripcion,ingredientes,foto,etiqueta,paso_rutina,incluye,va_bien_con
+balsamo,SI,Cuidado facial,Bálsamo limpiador,60 g,17920,Limpieza profunda y equilibrio natural.,Arcilla blanca · SCI · Manteca de karité · Hibisco,balsamo.jpg,,1,,"tonico, micelar"
+micelar,SI,Cuidado facial,Agua micelar,250 ml,17920,Limpieza suave para todos los días. Práctica y liviana.,Hidrolato de rosa · Betaína de coco,micelar.jpg,,1,,"tonico, balsamo"
+tonico,SI,Cuidado facial,Tónico facial,125 ml,23100,"Equilibrio y frescura después de la limpieza. Cierra poros, regula el pH y purifica.",Hamamelis · Manzanilla,tonico.jpg,,2,,"balsamo, bb, noche"
+bb,SI,Cuidado facial,BB Cream FPS 30,60 ml,22000,"Hidrata, ilumina y corrige imperfecciones. Protección solar FPS 30.",Ácido hialurónico · Karité · Óxido de zinc · Aceite de zanahoria · Algas,bb.jpg,Día,3,,"noche, kithidra"
+antiage,SI,Cuidado facial,Crema facial antiage FPS 30,60 ml,21450,"Calma, hidrata y regenera la piel.",Pepino · Caléndula · Rosa mosqueta,antiage.jpg,Día,3,,"noche, contorno"
+noche,SI,Cuidado facial,Crema facial de noche,60 g,22000,Antiage: regenera e hidrata la piel mientras descansás.,Ácido hialurónico · Rosa mosqueta · Manteca de karité · Caléndula,noche.jpg,Noche,3,,"bb, serummulti"
+lifting,SI,Cuidado facial,Crema facial lifting,60 ml,29850,"Efecto botox, antioxidante e hidratante.",GABA · DMAE (10%) · Ácido hialurónico · Manteca de karité · Hidrolato,lifting.jpg,Noche,3,,"serumtensor, kitlifting"
+serumtensor,SI,Cuidado facial,Serum tensor lifting,30 ml,39500,"Ultra reafirmante, efecto lifting.",GABA · DMAE (15%) · Ácido hialurónico · Colágeno,serumtensor.jpg,,,,"lifting, kitlifting"
+serummulti,SI,Cuidado facial,Serum facial multiacción,30 ml,19600,"Antiage, efecto relleno y tensor.",Ácido hialurónico de alto y bajo peso molecular · Niacinamida · Vitaminas C y E,serummulti.jpg,,,,"noche, kittrat"
+contorno,SI,Cuidado facial,Contorno de ojos,10 ml,18200,"Reduce bolsas y ojeras, mejora la elasticidad y la circulación de la piel.",Niacinamida · Cafeína · Ácido hialurónico vegetal · Rosa mosqueta · Vitamina E,contorno.jpg,,,,"serummulti, noche"
+kitlifting,SI,Kits y combos,Kit lifting,,63000,"Efecto botox, ultra reafirmante. Probalo y notá los resultados.",,kitlifting.jpg,,,"lifting, serumtensor",
+kithidra,SI,Kits y combos,Kit hidratación facial,,40900,Nutrición e hidratación facial para tu piel todos los días.,,kithidra.jpg,,,"bb, noche",
+kittrat,SI,Kits y combos,Kit tratamiento facial,,54900,"Tratamiento antiage, nutrición e hidratación facial todos los días.",,kittrat.jpg,,,"bb, noche, serummulti",
+combomanos,SI,Kits y combos,Combo manos + corporal,,35600,"Crema para manos y crema corporal, juntas a precio especial.",,combomanos.jpg,,,"manos, corporal",
+combocap,SI,Kits y combos,Combo champú + acondicionador,,36000,"Tu rutina capilar sólida completa, sin sulfatos ni siliconas.",,combocapilar.jpg,,,"champu, acond",
+combocap3,SI,Kits y combos,Combo capilar + óleo de argán,,51000,Champú y acondicionador sólidos más el toque final de argán.,,combocapilar3.jpg,,,"champu, acond, argan",
+deo,SI,Corporal y manos,Desodorante roll on,60 ml,17100,Frescura natural y protección todo el día. Suave para las pieles más sensibles.,Alumbre de potasio · Magnesio · Óxido de zinc · Aceites esenciales,deo.jpg,,,,corporal
+corporal,SI,Corporal y manos,Crema corporal,250 ml,19600,"Nutrición e hidratación profunda todos los días. Piel suave, luminosa y saludable.",Aloe vera · Hipérico · Manteca de karité · Caléndula,corporal.jpg,,,,"manos, combomanos"
+reafirmante,SI,Corporal y manos,Crema reafirmante,250 ml,23100,"Para pieles con várices, estrías y flacidez. Alivia la sensación de piernas cansadas.",Centella asiática · Castaño de Indias · Árnica · Hamamelis,reafirmante.jpg,,,,rosa
+rosa,SI,Corporal y manos,Crema de rosa mosqueta,250 ml,23100,"Nutre, regenera e ilumina. Ideal para el cuidado diario de todo el cuerpo.",Rosa mosqueta · Caléndula · Manteca de karité · Aloe vera,rosa.jpg,,,,"reafirmante, manos"
+manos,SI,Corporal y manos,Crema para manos,60 ml,19900,"Nutre, regenera e ilumina la piel.",Rosa mosqueta · Caléndula · Manteca de karité · Aloe vera,manos.jpg,,,,"corporal, combomanos"
+champu,SI,Capilar,Champú sólido,90 g,19900,"Elimina la grasa sin resecar el cuero cabelludo, fortalece la fibra y da salud a tu cabello.",Manteca de karité · Hibiscus · Proteína B5 · Tensioactivos naturales,champu.jpg,,,,"acond, combocap"
+acond,SI,Capilar,Acondicionador sólido,70 g,19900,"Desenreda, da brillo y atenúa el frizz.",Manteca de cacao · Rosa mosqueta · Aloe vera · Romero · Aceites esenciales,acond.jpg,,,,"champu, argan"
+argan,SI,Capilar,Óleo de argán,60 ml,24800,"Suavidad y brillo, atenúa el frizz. Rico en vitamina E y ácidos grasos esenciales que reparan el cabello dañado.",Aceite de argán,argan.jpg,,,,combocap3
+relajante,SI,Aromaterapia,Perfume Relajante,10 ml,22200,"Calma tu mente y alivia el estrés. El geranio equilibra, la rosa aporta armonía y el jazmín serenidad.",Geranio · Rosas · Jazmín,relajante.jpg,Roll on,,,"energizante, revitalizante"
+energizante,SI,Aromaterapia,Perfume Energizante,10 ml,22200,"Activa tu energía y mejora tu ánimo. Gardenia, naranja y jengibre para alegría y enfoque.",Gardenia · Naranja · Jengibre,energizante.jpg,Roll on,,,"relajante, revitalizante"
+revitalizante,SI,Aromaterapia,Perfume Revitalizante,10 ml,22200,"Refresca tu cuerpo y renueva tu mente. Lavanda, limón y menta para claridad y bienestar.",Lavanda · Limón · Menta,revitalizante.jpg,Roll on,,,"relajante, energizante"
+`;
+// ===========================
+function parseCSV(t){const rows=[];let r=[],f="",q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true; else if(c===','){r.push(f);f=""} else if(c==='\n'){r.push(f);rows.push(r);r=[];f=""} else if(c!=='\r')f+=c}
+  if(f!==""||r.length){r.push(f);rows.push(r)}
+  const head=rows.shift().map(s=>s.trim().toLowerCase());
+  return rows.filter(x=>x.some(v=>v.trim())).map(x=>Object.fromEntries(head.map((k,i)=>[k,(x[i]||"").trim()])));
+}
+const list=s=>(s||"").split(/[,;]/).map(v=>v.trim()).filter(Boolean);
+function fromRows(rows){
+  const out=rows.filter(r=>r.id && r.nombre && (r.activo||"SI").toUpperCase()!=="NO").map(r=>({
+    id:r.id,cat:r.categoria||"Otros",n:r.nombre,s:r["tamaño"]||r.tamano||"",p:+(String(r.precio).replace(/[^0-9]/g,""))||0,
+    d:r.descripcion||"",i:r.ingredientes||"",tag:r.etiqueta||"",step:r.paso_rutina?"paso"+String(r.paso_rutina).replace(/[^0-9]/g,""):"",
+    img:/^https?:/.test(r.foto)?r.foto:(r.foto?"img/"+r.foto:"img/mandala.png"),items:list(r.incluye),pair:list(r.va_bien_con)}));
+  const ids=new Set(out.map(x=>x.id));
+  out.forEach(x=>{x.items=x.items.filter(i=>ids.has(i));if(!x.items.length)delete x.items;x.pair=x.pair.filter(i=>ids.has(i))});
+  return out.filter(x=>x.p>0);
+}
+let P=fromRows(parseCSV(FALLBACK_CSV)), CATS=[], byId={};
+function setData(arr){P=arr;byId=Object.fromEntries(P.map(x=>[x.id,x]));CATS=[["todo","Todo"],...[...new Set(P.map(x=>x.cat))].map(c=>[c,c])]}
+setData(P);
+const AROMA_TIP = "Aplicalo en los puntos de pulso: cuello, muñecas, detrás de las orejas, plexo solar o interior de los codos. En zonas cálidas el aroma es más intenso; en las más frescas, más suave.";
+const $ = s=>document.querySelector(s);
+const money = n=>"$"+Math.round(n).toLocaleString("es-AR");
+const sep = k=>k.items.reduce((a,id)=>a+byId[id].p,0);
+let cart = {}, cat = "todo", step = null;
+try{cart = JSON.parse(localStorage.getItem("calixta-cart")||"{}")}catch(e){cart={}}
+for(const k in cart) if(!byId[k]) delete cart[k];
+const save = ()=>{try{localStorage.setItem("calixta-cart",JSON.stringify(cart))}catch(e){}};
+const waLink = t=>"https://wa.me/"+WA+(t?"?text="+encodeURIComponent(t):"");
+$("#waFloat").href = waLink("¡Hola Calixta! Tengo una consulta:");
+$("#waText").href = waLink("");
+
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1800)}
+function setQ(id,q){if(q<=0)delete cart[id];else cart[id]=q;save();render();renderCart()}
+
+function renderChips(){
+  $("#chips").innerHTML = CATS.map(([k,l])=>`<button class="chip" data-cat="${k}" aria-pressed="${cat===k&&!step}">${l}</button>`).join("") +
+   (step?`<button class="chip" aria-pressed="true" data-cat="todo">Paso ${step.slice(-1)} · quitar ×</button>`:"");
+}
+function buyBox(x){const q=cart[x.id]||0;
+  return q?`<div class="qty"><button data-dec="${x.id}" aria-label="Quitar uno">−</button><span>${q} en tu pedido</span><button data-inc="${x.id}" aria-label="Sumar uno">+</button></div>`
+          :`<button class="add" data-inc="${x.id}">Agregar</button>`}
+function render(){
+  const q=$("#q").value.trim().toLowerCase();
+  const list=P.filter(x=>(step?x.step===step:(cat==="todo"||x.cat===cat)) && (!q||(x.n+" "+x.d+" "+(x.i||"")).toLowerCase().includes(q)));
+  $("#grid").innerHTML = list.length? list.map(x=>{
+    const s = x.items? sep(x)-x.p : 0;
+    return `<article class="card"><button class="ph" data-open="${x.id}" aria-label="Ver ${x.n}">${x.tag?`<span class="tag">${x.tag}</span>`:""}<img loading="lazy" src="${x.img}" alt="${x.n}" onload="this.naturalWidth/this.naturalHeight<.6&&this.classList.add('tall')"></button>
+    <div class="bd"><h3>${x.n}</h3>${s>0?`<span class="save">Ahorrás ${money(s)}</span>`:""}<p>${x.d}</p>
+    <div class="meta"><span class="price">${money(x.p)}</span><span class="size">${x.s||(x.items.length+" productos")}</span></div>${buyBox(x)}</div></article>`}).join("")
+    : `<div class="empty">No encontramos productos con esa búsqueda. Probá con otra palabra o escribinos por WhatsApp.</div>`;
+  const n=Object.values(cart).reduce((a,b)=>a+b,0); $("#count").textContent=n;
+  renderChips();
+}
+function openDetail(id){const x=byId[id];
+  const inc = x.items? `<h4>Incluye</h4><p>${x.items.map(i=>byId[i].n+" ("+byId[i].s+")").join(" + ")}</p><p>Por separado: ${money(sep(x))}. <b>Precio especial: ${money(x.p)}</b></p>`:"";
+  const pairs = (x.pair||[]).map(i=>`<button data-open="${i}">${byId[i].n}</button>`).join("");
+  $("#dlg").innerHTML = `<div class="det"><img src="${x.img}" alt="${x.n}" onload="this.naturalWidth/this.naturalHeight<.6&&this.classList.add('tall')"><div class="in">
+   <div style="display:flex;justify-content:space-between;gap:10px"><h2>${x.n}</h2><button class="x" data-close aria-label="Cerrar">×</button></div>
+   <p>${x.d}</p>${inc}${x.i?`<h4>Ingredientes destacados</h4><p>${x.i}</p>`:""}${/aroma/i.test(x.cat)?`<h4>Cómo usarlo</h4><p>${AROMA_TIP}</p>`:""}
+   <div class="meta"><span class="price">${money(x.p)}</span><span class="size">${x.s||""}</span></div>${buyBox(x)}
+   ${pairs?`<h4>Va muy bien con</h4><div class="pairs">${pairs}</div>`:""}</div></div>`;
+  const d=$("#dlg"); if(!d.open) d.showModal();
+}
+function suggestions(){
+  return P.filter(k=>k.items && !cart[k.id] && k.items.every(i=>cart[i]>0) && sep(k)>k.p)
+    .sort((a,b)=>b.items.length-a.items.length).slice(0,1)
+    .map(k=>`<div class="tip"><span>Ya tenés todo lo del <b>${k.n}</b>: pasalo a kit y ahorrás <b>${money(sep(k)-k.p)}</b>.</span><button data-swap="${k.id}">Cambiar a ${k.n}</button></div>`).join("");
+}
+let form = {nombre:"",entrega:"",zona:"",pago:"",nota:""};
+try{Object.assign(form,JSON.parse(localStorage.getItem("calixta-form")||"{}"))}catch(e){}
+function renderCart(){
+  const ids=Object.keys(cart);
+  if(!ids.length){$("#cartBody").innerHTML=`<div class="empty">Tu pedido está vacío.<br>Sumá productos desde la tienda.</div>`;$("#cartFoot").innerHTML=`<button class="btn" data-close-cart>Ver productos</button>`;return}
+  const total=ids.reduce((a,id)=>a+byId[id].p*cart[id],0);
+  const opt=(arr,v)=>arr.map(o=>`<option ${o===v?"selected":""}>${o}</option>`).join("");
+  $("#cartBody").innerHTML = ids.map(id=>{const x=byId[id];return `<div class="line"><img src="${x.img}" alt=""><div><b>${x.n}</b><small>${money(x.p)}${x.s?" · "+x.s:""}</small></div>
+    <div class="mini"><button data-dec="${id}" aria-label="Quitar uno">−</button><span>${cart[id]}</span><button data-inc="${id}" aria-label="Sumar uno">+</button></div></div>`}).join("") + suggestions() +
+   `<div class="form">
+    <label>Tu nombre*<input id="f-nombre" autocomplete="name" value="${form.nombre.replace(/"/g,"&quot;")}"></label>
+    <label>Entrega<select id="f-entrega"><option value="">Elegí una opción</option>${opt(["Envío en Córdoba Capital","Envío en Sierras Chicas","Retiro en punto acordado","Envío al resto del país"],form.entrega)}</select></label>
+    <label>Barrio o localidad<input id="f-zona" autocomplete="address-level2" value="${form.zona.replace(/"/g,"&quot;")}"></label>
+    <label>¿Cómo preferís pagar?<select id="f-pago"><option value="">Lo coordinamos por WhatsApp</option>${opt(["Transferencia","Efectivo","Mercado Pago"],form.pago)}</select></label>
+    <label>Comentario (opcional)<textarea id="f-nota" rows="2">${form.nota.replace(/</g,"&lt;")}</textarea></label></div>`;
+  $("#cartFoot").innerHTML = `<div class="tot"><span>Total</span><span>${money(total)}</span></div>
+   <small style="color:var(--soft)">El envío se coordina por WhatsApp.</small><div class="err" id="err"></div>
+   <a class="btn wa" id="send" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>`;
+}
+function message(){
+  const ids=Object.keys(cart), d=new Date();
+  const code="CX-"+String(d.getDate()).padStart(2,"0")+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getHours()).padStart(2,"0")+String(d.getMinutes()).padStart(2,"0");
+  const total=ids.reduce((a,id)=>a+byId[id].p*cart[id],0);
+  const L=["¡Hola Calixta! Quiero hacer este pedido 🌿","Pedido "+code,"",
+    ...ids.map(id=>`• ${cart[id]} × ${byId[id].n}${byId[id].s?" ("+byId[id].s+")":""} — ${money(byId[id].p*cart[id])}`),"",
+    "Total productos: "+money(total),"","Nombre: "+form.nombre.trim()];
+  if(form.entrega)L.push("Entrega: "+form.entrega);
+  if(form.zona.trim())L.push("Barrio/localidad: "+form.zona.trim());
+  L.push("Pago: "+(form.pago||"a coordinar"));
+  if(form.nota.trim())L.push("Comentario: "+form.nota.trim());
+  return L.join("\n");
+}
+const openCart=()=>{renderCart();$("#drawer").classList.add("open");$("#veil").classList.add("on")};
+const closeCart=()=>{$("#drawer").classList.remove("open");$("#veil").classList.remove("on")};
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,a"); if(!t) return;
+  if(t.dataset.inc){const x=byId[t.dataset.inc];setQ(x.id,(cart[x.id]||0)+1);if(!(cart[x.id]>1))toast(x.n+" sumado a tu pedido");if($("#dlg").open)openDetail(x.id);if(t.closest("#dlg")===null&&$("#drawer").contains(t))renderCart()}
+  else if(t.dataset.dec){setQ(t.dataset.dec,(cart[t.dataset.dec]||0)-1);if($("#dlg").open)openDetail(t.dataset.dec)}
+  else if(t.dataset.open){openDetail(t.dataset.open)}
+  else if("close" in t.dataset){$("#dlg").close()}
+  else if(t.dataset.cat){step=null;cat=t.dataset.cat;render()}
+  else if(t.dataset.go){step=t.dataset.go;cat="todo";render();document.getElementById("tienda").scrollIntoView()}
+  else if(t.dataset.swap){const k=byId[t.dataset.swap];k.items.forEach(i=>cart[i]>1?cart[i]--:delete cart[i]);cart[k.id]=1;save();render();renderCart();toast("Listo: ahorrás "+money(sep(k)-k.p))}
+  else if(t.id==="openCart"){openCart()}
+  else if(t.id==="closeCart"||"closeCart" in t.dataset){closeCart()}
+  else if(t.id==="send"){
+    if(!form.nombre.trim()){e.preventDefault();$("#err").textContent="Poné tu nombre así sabemos de quién es el pedido.";$("#f-nombre").focus();return}
+    t.href=waLink(message());
+  }
+  else if(t.id==="share"){const u=location.href.split("#")[0];navigator.clipboard?.writeText(u).then(()=>toast("Link copiado: compartilo con quien quieras"),()=>toast(u))}
+});
+document.addEventListener("click",e=>{if(e.target.closest("[data-close-cart]"))closeCart()});
+$("#veil").addEventListener("click",closeCart);
+$("#dlg").addEventListener("click",e=>{if(e.target===$("#dlg"))$("#dlg").close()});
+document.addEventListener("input",e=>{const m=e.target.id&&e.target.id.match(/^f-(\w+)/);if(m){form[m[1]]=e.target.value;try{localStorage.setItem("calixta-form",JSON.stringify(form))}catch(x){};const r=$("#err");if(r)r.textContent=""}});
+document.addEventListener("change",e=>{const m=e.target.id&&e.target.id.match(/^f-(\w+)/);if(m){form[m[1]]=e.target.value;try{localStorage.setItem("calixta-form",JSON.stringify(form))}catch(x){}}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCart()});
+$("#q").addEventListener("input",()=>{step=null;render()});
+render();
+function load(arr){setData(arr);for(const k in cart)if(!byId[k])delete cart[k];save();render();if($("#drawer").classList.contains("open"))renderCart()}
+try{const c=JSON.parse(localStorage.getItem("calixta-data")||"null");if(c&&c.length)load(c)}catch(e){}
+fetch(SHEET_URL+"&t="+Date.now()).then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{const d=fromRows(parseCSV(t));if(d.length){load(d);try{localStorage.setItem("calixta-data",JSON.stringify(d))}catch(e){}}}).catch(()=>{});
+}
+</script>
+</body>
+</html>
